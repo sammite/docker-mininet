@@ -1,6 +1,7 @@
 # docker-mininet
 
 The Docker image for [Mininet](http://mininet.org/)
+Goal of this fork is to make an up to date version that is also very very small. Will be trying to get it to work on Alpine.
 
 ## Docker Pull Command
 
