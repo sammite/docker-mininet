@@ -1,24 +1,27 @@
-FROM ubuntu:18.04
+FROM python:alpine3.15
 
 USER root
 WORKDIR /root
 
-COPY ENTRYPOINT.sh /
+COPY ENTRYPOINT.sh alt_install.sh /
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apk update && apk add \
     curl \
     iproute2 \
-    iputils-ping \
-    mininet \
+    iputils \
     net-tools \
-    openvswitch-switch \
-    openvswitch-testcontroller \
+    openvswitch \
     tcpdump \
     vim \
-    x11-xserver-utils \
+    libx11 \
     xterm \
- && rm -rf /var/lib/apt/lists/* \
+    git \
+    bash \
  && chmod +x /ENTRYPOINT.sh
+
+RUN git clone https://github.com/mininet/mininet.git && \
+    mv /alt_install.sh /root/mininet/util/ && \
+    /bin/bash /root/mininet/util/alt_install.sh 
 
 EXPOSE 6633 6653 6640
 
